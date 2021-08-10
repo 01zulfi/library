@@ -11,5 +11,33 @@
         <h1>Library</h1>
         <button class="newBook">New Book</button>
         <div class="bookDiv"></div>
+        <div class="form" hidden>
+            <form onsubmit="return false;">
+            <ul>
+                <li>
+                    <label for="bookTitle">Book Title</label>
+                    <input type="text" id="bookTitle" name="bookTitle">
+                </li>
+                <li>
+                    <label for="bookAuthor">Book Author</label>
+                    <input type="text" id="bookAuthor" name="bookAuthor">
+                </li>
+                <li>
+                    <label for="bookPages">Pages</label>
+                    <input type="number" id="bookPages" name="bookPages">
+                </li>
+                <li>
+                    <p>Have you read the book?</p>
+                    <input type="radio" id="readYes" name="bookRead" value="Yes" checked>
+                    <label for="readYes">Yes</label><br>
+                    <input type="radio" id="readNo" name="bookRead" value="No">
+                    <label for="readNo">No</label><br>
+                </li>
+                <li>
+                    <input class="submit" type="submit">
+                </li>
+            </ul>
+        </form>
+        </div>
     </body>
 </html>

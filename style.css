@@ -12,7 +12,16 @@ h1 {
     display: flex; 
 }
 
-.bookCard {
+#bookCard {
    border: 5px solid white;
    margin: 2vw; 
+}
+
+ul {
+    list-style-type: none;
+    border: 2px solid white;
+}
+
+label {
+    border: 1px solid green;
 }
