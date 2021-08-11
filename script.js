@@ -1,9 +1,10 @@
 let myLibrary = [ 
-   // {title:"Famous Five", author:"Enid Blyton", pages:"300", read:"yes"},
+    //{title:"Famous Five", author:"Enid Blyton", pages:"300", read:"yes"},
    // {title:"Mathematics", author:"Mathematician", pages:"3000", read:"no"}
 ];
 
-let count = 0;
+
+let count = myLibrary.length;
 
 const bookDiv = document.querySelector('.bookDiv');
 
@@ -15,6 +16,13 @@ newBook.addEventListener('click', accessForm);
 const submit = document.querySelector('.submit');
 submit.addEventListener('click', addBookToLibrary);
 submit.addEventListener('click', accessForm);
+submit.addEventListener('click', submitForm);
+
+function submitForm() {
+    const form = document.querySelector('form');
+    form.reset();
+    return false
+}
 
 function Book() {
     this.title = document.getElementById('bookTitle').value;
@@ -54,12 +62,13 @@ function displayBook() {
     bookDiv.appendChild(bookCard);
     count++;
 
-    let deleteBookNodeList = document.querySelectorAll('#deleteBook');
-    deleteBookFunction(deleteBookNodeList);
+    deleteBookFunction();
 }
 
-function deleteBookFunction(deleteBookNodeList) {
+function deleteBookFunction() {
+    deleteBookNodeList = document.querySelectorAll('#deleteBook');
     deleteBookNodeList.forEach(index => index.addEventListener('click', () => {
+        myLibrary.splice(index.className, 0);
         let bookCardToDelete = document.querySelectorAll('#bookCard');
         for ( let i = 0; i < bookCardToDelete.length; i++) {
             if (index.className === bookCardToDelete[i].className) {
@@ -68,3 +77,5 @@ function deleteBookFunction(deleteBookNodeList) {
         }
     }))
 }
+
+

@@ -12,11 +12,11 @@
         <button class="newBook">New Book</button>
         <div class="bookDiv"></div>
         <div class="form" hidden>
-            <form onsubmit="return false;">
+            <form>
             <ul>
                 <li>
                     <label for="bookTitle">Book Title</label>
-                    <input type="text" id="bookTitle" name="bookTitle">
+                    <input type="text" id="bookTitle" name="bookTitle" required>
                 </li>
                 <li>
                     <label for="bookAuthor">Book Author</label>
@@ -27,14 +27,14 @@
                     <input type="number" id="bookPages" name="bookPages">
                 </li>
                 <li>
-                    <p>Have you read the book?</p>
+                    <label>Have you read the book?</label><br>
                     <input type="radio" id="readYes" name="bookRead" value="Yes" checked>
                     <label for="readYes">Yes</label><br>
                     <input type="radio" id="readNo" name="bookRead" value="No">
                     <label for="readNo">No</label><br>
                 </li>
                 <li>
-                    <input class="submit" type="submit">
+                    <input class="submit" type="button" value="submit">
                 </li>
             </ul>
         </form>
