@@ -56,8 +56,8 @@ function displayBook() {    //compartmantelize function
     label.textContent = 'Read?';
     label.appendChild(checkBox);
 
-    bookCard.classList.add(`${count}`)
-    bookCard.setAttribute('id', 'bookCard')
+    bookCard.id = `${count}`;
+    bookCard.classList.add('bookCard');
     bookTitle.textContent = myLibrary[count].title;
     bookAuthor.textContent = 'By ' + myLibrary[count].author;
     bookPages.textContent = myLibrary[count].pages + ' pages';
@@ -67,8 +67,8 @@ function displayBook() {    //compartmantelize function
         checkBox.checked = false;
     }
     deleteBook.textContent = 'Delete';
-    deleteBook.classList.add(`${count}`);
-    deleteBook.setAttribute('id', 'deleteBook');
+    deleteBook.id = `${count}`;
+    deleteBook.classList.add('deleteBook');
     bookCard.append(bookTitle, bookAuthor, bookPages, label, deleteBook);
     bookDiv.appendChild(bookCard);
     count++;
@@ -77,28 +77,25 @@ function displayBook() {    //compartmantelize function
 }
 
 function deleteBookFunction() {
-    deleteBookNodeList = document.querySelectorAll('#deleteBook');
+    deleteBookNodeList = document.querySelectorAll('.deleteBook');
     deleteBookNodeList.forEach(index => index.addEventListener('click', () => { //convert this to for loop
-        const bookCardToDelete = document.querySelectorAll('#bookCard');
+        const bookCardToDelete = document.querySelectorAll('.bookCard');
         for ( let i = 0; i < bookCardToDelete.length; i++) {
-            if (index.className === bookCardToDelete[i].className) {
-                myLibrary.splice(index.className, 1);
+            if (index.id === bookCardToDelete[i].id) {
+                myLibrary.splice(i, 1);
                 bookCardToDelete[i].remove();
-                const bookCardLeft = document.querySelectorAll('#bookCard');
-                bookCardLeft.forEach(index => {
-                        //index.removeAttribute("class");
-                    })
-                        for (let key of bookCardLeft.keys()) {
-                            //index.className = "";
-                            bookCardLeft[key].classList.add(`${key}`);
-                        }
-                //})
-                console.log(bookCardLeft)
                 count--;
             }
         }
-
     }))
+    const bookCardLeft = document.querySelectorAll('.bookCard');
+        for ( let j = 0; j < bookCardLeft.length; j++) {
+            bookCardLeft[j].id = `${j}`;
+        }
+    const deleteBookLeft = document.querySelectorAll('.deleteBook');
+    for ( let j = 0; j < deleteBookLeft.length; j++) {
+        deleteBookLeft[j].id = `${j}`;
+    }
 }
 
 function changeReadStatus() {

@@ -12,7 +12,7 @@ h1 {
     display: flex; 
 }
 
-#bookCard {
+.bookCard {
    border: 5px solid white;
    margin: 2vw; 
 }
