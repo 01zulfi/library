@@ -8,21 +8,14 @@ let count = myLibrary.length;
 
 const bookDiv = document.querySelector('.bookDiv');
 
-const form = document.querySelector('.form');
+const formDiv = document.querySelector('.form');
 
 const newBook = document.querySelector('.newBook');
 newBook.addEventListener('click', accessForm);
 
-const submit = document.querySelector('.submit');
-submit.addEventListener('click', addBookToLibrary);
-submit.addEventListener('click', accessForm);
-submit.addEventListener('click', submitForm);
-
-function submitForm() {
-    const form = document.querySelector('form');
-    form.reset();
-    return false
-}
+const form = document.querySelector('form');
+form.addEventListener('submit', clickHandler);
+form.addEventListener("submit", submitForm)
 
 function Book() {
     this.title = document.getElementById('bookTitle').value;
@@ -32,7 +25,7 @@ function Book() {
 }
 
 function accessForm() {
-    form.toggleAttribute('hidden'); 
+    formDiv.toggleAttribute('hidden'); 
 }
 
 function addBookToLibrary() {
@@ -41,7 +34,17 @@ function addBookToLibrary() {
     displayBook();
 }
 
-function displayBook() {    //compartmantelize function
+function clickHandler() {
+    addBookToLibrary();
+    accessForm();
+}
+
+function submitForm(e){
+    e.preventDefault()
+    form.reset()
+} 
+
+function displayBook() {   
     const bookCard = document.createElement('div');
     const bookTitle = document.createElement('p');
     const bookAuthor = document.createElement('p');
