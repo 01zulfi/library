@@ -45,6 +45,7 @@ function submitForm(e){
 } 
 
 function displayBook() {   
+    //populateStorage();
     const bookCard = document.createElement('div');
     const bookTitle = document.createElement('p');
     const bookAuthor = document.createElement('p');
@@ -78,6 +79,7 @@ function displayBook() {
     bookCard.append(bookTitle, bookAuthor, bookPages, label, deleteBook);
     bookDiv.appendChild(bookCard);
     count++;
+    populateStorage();
     checkBox.addEventListener('change', Book.prototype.changeReadStatus)
     deleteBookFunction();
 }
@@ -106,6 +108,7 @@ function deleteBookFunction() {
     for ( let j = 0; j < checkBoxLeft.length; j++) {
         checkBoxLeft[j].id = `${j}`;
     }
+    populateStorage();
 }
 
 
@@ -120,7 +123,18 @@ Book.prototype.changeReadStatus = function() {
         bookCardNodeList[this.id].classList.remove('readYes');
         bookCardNodeList[this.id].classList.add('readNo');
     }
+    populateStorage();
 }
 
 
+// L O C A L    S T O R A G E   
 
+
+//localStorage.clear();
+
+function populateStorage() {
+    localStorage.setItem(`bookTitle${count-1}`, myLibrary[count-1].title);
+    localStorage.setItem(`bookAuthor${count-1}`, myLibrary[count-1].author);
+    localStorage.setItem(`bookPages${count-1}`, myLibrary[count-1].pages);
+    localStorage.setItem(`bookRead${count-1}`, myLibrary[count-1].read);
+}
