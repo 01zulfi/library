@@ -53,7 +53,8 @@ function displayBook() {
     const checkBox = document.createElement('input');
     checkBox.type = "checkbox";
     checkBox.name = "bookReadStatus";
-    checkBox.id = "bookReadStatus";
+    checkBox.class = "bookReadStatus"
+    checkBox.id = `${count}`;
     const label = document.createElement('label');
     label.for = "id";
     label.textContent = 'Read?';
@@ -66,8 +67,10 @@ function displayBook() {
     bookPages.textContent = myLibrary[count].pages + ' pages';
     if (myLibrary[count].read === "Yes") {
         checkBox.checked = true;
+        bookCard.classList.add('readYes');
     } else {
         checkBox.checked = false;
+        bookCard.classList.add('readNo');
     }
     deleteBook.textContent = 'Delete';
     deleteBook.id = `${count}`;
@@ -75,7 +78,7 @@ function displayBook() {
     bookCard.append(bookTitle, bookAuthor, bookPages, label, deleteBook);
     bookDiv.appendChild(bookCard);
     count++;
-
+    checkBox.addEventListener('change', Book.prototype.changeReadStatus)
     deleteBookFunction();
 }
 
@@ -99,9 +102,25 @@ function deleteBookFunction() {
     for ( let j = 0; j < deleteBookLeft.length; j++) {
         deleteBookLeft[j].id = `${j}`;
     }
+    const checkBoxLeft = document.querySelectorAll('input[name="bookReadStatus"]');
+    for ( let j = 0; j < checkBoxLeft.length; j++) {
+        checkBoxLeft[j].id = `${j}`;
+    }
 }
 
-function changeReadStatus() {
 
+Book.prototype.changeReadStatus = function() {
+    const bookCardNodeList = document.querySelectorAll('.bookCard');
+    if (this.checked) {
+        myLibrary[this.id].read = "Yes"
+        bookCardNodeList[this.id].classList.remove('readNo');
+        bookCardNodeList[this.id].classList.add('readYes');
+    } else {
+        myLibrary[this.id].read = "No"
+        bookCardNodeList[this.id].classList.remove('readYes');
+        bookCardNodeList[this.id].classList.add('readNo');
+    }
 }
+
+
 

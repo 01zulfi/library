@@ -25,3 +25,11 @@ ul {
 label {
     border: 1px solid green;
 }
+
+.bookCard.readYes {
+    box-shadow: 5px 5px green;
+}
+
+.bookCard.readNo {
+    box-shadow: 5px 5px red;
+}
