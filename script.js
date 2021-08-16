@@ -1,10 +1,14 @@
 let myLibrary = [ 
-    //{title:"Famous Five", author:"Enid Blyton", pages:"300", read:"yes"},
+    //{title:"Famous Five", author:"Enid Blyton", pages:"300", read:"Yes"},
    //{title:"Mathematics", author:"Mathematician", pages:"3000", read:"no"}
 ];
 
+retrieveStorage();
 
-let count = myLibrary.length;
+let count = 0;
+
+
+
 
 const bookDiv = document.querySelector('.bookDiv');
 
@@ -16,6 +20,9 @@ newBook.addEventListener('click', accessForm);
 const form = document.querySelector('form');
 form.addEventListener('submit', clickHandler);
 form.addEventListener("submit", submitForm)
+
+
+
 
 function Book() {
     this.title = document.getElementById('bookTitle').value;
@@ -44,8 +51,9 @@ function submitForm(e){
     form.reset()
 } 
 
+
+
 function displayBook() {   
-    //populateStorage();
     const bookCard = document.createElement('div');
     const bookTitle = document.createElement('p');
     const bookAuthor = document.createElement('p');
@@ -78,14 +86,16 @@ function displayBook() {
     deleteBook.classList.add('deleteBook');
     bookCard.append(bookTitle, bookAuthor, bookPages, label, deleteBook);
     bookDiv.appendChild(bookCard);
-    count++;
-    populateStorage();
     checkBox.addEventListener('change', Book.prototype.changeReadStatus)
+    count++;
+
     deleteBookFunction();
 }
 
+
+
 function deleteBookFunction() {
-    deleteBookNodeList = document.querySelectorAll('.deleteBook');
+    const deleteBookNodeList = document.querySelectorAll('.deleteBook');
     deleteBookNodeList.forEach(index => index.addEventListener('click', () => { //convert this to for loop
         const bookCardToDelete = document.querySelectorAll('.bookCard');
         for ( let i = 0; i < bookCardToDelete.length; i++) {
@@ -93,8 +103,10 @@ function deleteBookFunction() {
                 myLibrary.splice(i, 1);
                 bookCardToDelete[i].remove();
                 count--;
+                populateStorage();
             }
         }
+    
     }))
     const bookCardLeft = document.querySelectorAll('.bookCard');
         for ( let j = 0; j < bookCardLeft.length; j++) {
@@ -133,8 +145,31 @@ Book.prototype.changeReadStatus = function() {
 //localStorage.clear();
 
 function populateStorage() {
-    localStorage.setItem(`bookTitle${count-1}`, myLibrary[count-1].title);
-    localStorage.setItem(`bookAuthor${count-1}`, myLibrary[count-1].author);
-    localStorage.setItem(`bookPages${count-1}`, myLibrary[count-1].pages);
-    localStorage.setItem(`bookRead${count-1}`, myLibrary[count-1].read);
+    localStorage.clear();
+    for (let i = 0; i < myLibrary.length; i++) {
+        localStorage.setItem(`bookTitle${i}`, myLibrary[i].title);
+        localStorage.setItem(`bookAuthor${i}`, myLibrary[i].author);
+        localStorage.setItem(`bookPages${i}`, myLibrary[i].pages);
+        localStorage.setItem(`bookRead${i}`, myLibrary[i].read);
+    }
 }
+
+function retrieveStorage() {
+    if (localStorage.length ===0) return
+    myLibraryLength = localStorage.length / 4;
+    for (let i = 0; i<myLibraryLength;i++) {
+        let book = {
+            title: localStorage.getItem(`bookTitle${i}`),
+            author: localStorage.getItem(`bookAuthor${i}`),
+            pages: localStorage.getItem(`bookPages${i}`),
+            read: localStorage.getItem(`bookRead${i}`)
+        }
+        myLibrary.push(book);
+    }
+
+}
+
+for (let i =0 ; i < myLibrary.length; i++) {
+    displayBook();
+}
+
