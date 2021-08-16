@@ -3,13 +3,28 @@ body {
     color: white;
 }
 
-h1 {
-    text-align: center;
-    border: 5px solid whitesmoke;
+div.top {
+    border: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+h1 {
+    border: 1px solid whitesmoke;
+}
+
+.newBook {
+    width: 5vw;
+    height: 4vh;
+    border-radius: 50%;
+    
+}
+
 
 .bookDiv {
     display: flex; 
+    flex-wrap: wrap;
 }
 
 .bookCard {
@@ -33,3 +48,4 @@ label {
 .bookCard.readNo {
     box-shadow: 5px 5px red;
 }
+
