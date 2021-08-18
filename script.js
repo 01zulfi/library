@@ -1,31 +1,13 @@
-let myLibrary = [ 
-    //{title:"Famous Five", author:"Enid Blyton", pages:"300", read:"Yes"},
-   //{title:"Mathematics", author:"Mathematician", pages:"3000", read:"no"}
-];
+let myLibrary = [];
 
 retrieveStorage();
 
 let count = 0;
-
-
-
-
 const bookDiv = document.querySelector('.bookDiv');
-
 const formDiv = document.querySelector('.form');
-
 const newBook = document.querySelector('.newBook');
-newBook.addEventListener('click', openForm);
-
 const span = document.querySelector('span');
-span.addEventListener('click', closeForm);
-
 const form = document.querySelector('form');
-form.addEventListener('submit', clickHandler);
-form.addEventListener("submit", submitForm)
-
-
-
 
 function Book() {
     this.title = document.getElementById('bookTitle').value;
@@ -58,36 +40,48 @@ function submitForm(e){
     form.reset()
 } 
 
-
-
 function displayBook() {   
     const bookCard = document.createElement('div');
     const bookTitle = document.createElement('p');
     const bookAuthor = document.createElement('p');
     const bookPages = document.createElement('p');
-    const deleteBook = document.createElement('button');
-    const checkBox = document.createElement('input');
-    checkBox.type = "checkbox";
-    checkBox.name = "bookReadStatus";
-    checkBox.class = "bookReadStatus"
-    checkBox.id = `${count}`;
     const label = document.createElement('label');
-    label.for = "id";
-    label.textContent = 'Read?';
-    label.appendChild(checkBox);
+    const checkBox = document.createElement('input');
+    const deleteBook = document.createElement('button');
+    
+    bookCardDisplay(bookCard, bookTitle, bookAuthor, bookPages);
+    checkBoxDisplay(checkBox, label, bookCard);
+    deleteBookDisplay(deleteBook);
+ 
+    bookCard.append(bookTitle, bookAuthor, bookPages, label, deleteBook);
+    bookDiv.appendChild(bookCard);
+    
+    count++;
+ 
+    deleteBookFunction();
+}
 
-    bookTitle.classList.add("bookTitle")
-    bookAuthor.classList.add("bookAuthor")
-    bookPages.classList.add("bookPages")
-    label.classList.add("bookReadLabel")
-
-
-
+function bookCardDisplay(bookCard, bookTitle, bookAuthor, bookPages) {
+    bookTitle.classList.add("bookTitle");
+    bookAuthor.classList.add("bookAuthor");
+    bookPages.classList.add("bookPages");
     bookCard.id = `${count}`;
     bookCard.classList.add('bookCard');
     bookTitle.textContent = myLibrary[count].title;
     bookAuthor.textContent = 'By: ' + myLibrary[count].author;
     bookPages.textContent = myLibrary[count].pages + ' pages';
+}
+
+function checkBoxDisplay(checkBox, label, bookCard) {
+    checkBox.type = "checkbox";
+    checkBox.name = "bookReadStatus";
+    checkBox.class = "bookReadStatus"
+    checkBox.id = `${count}`;
+    label.for = "id";
+    label.textContent = 'Read?';
+    label.classList.add("bookReadLabel")
+    label.appendChild(checkBox);
+
     if (myLibrary[count].read === "Yes") {
         checkBox.checked = true;
         bookCard.classList.add('readYes');
@@ -95,25 +89,19 @@ function displayBook() {
         checkBox.checked = false;
         bookCard.classList.add('readNo');
     }
+
+    checkBox.addEventListener('change', Book.prototype.changeReadStatus)
+}
+
+function deleteBookDisplay(deleteBook) {
     deleteBook.textContent = 'Delete';
     deleteBook.id = `${count}`;
     deleteBook.classList.add('deleteBook');
-    bookCard.append(bookTitle, bookAuthor, bookPages, label, deleteBook);
-    bookDiv.appendChild(bookCard);
-    checkBox.addEventListener('change', Book.prototype.changeReadStatus)
-    count++;
- 
-    deleteBookFunction();
-
-
 }
-
-window.addEventListener('click', shiftId);
-
 
 function deleteBookFunction() {
     const deleteBookNodeList = document.querySelectorAll('.deleteBook');
-    deleteBookNodeList.forEach(index => index.addEventListener('click', () => { //convert this to for loop
+    deleteBookNodeList.forEach(index => index.addEventListener('click', () => { 
         const bookCardToDelete = document.querySelectorAll('.bookCard');
         for ( let i = 0; i < bookCardToDelete.length; i++) {
             if (index.id === bookCardToDelete[i].id) {
@@ -127,18 +115,17 @@ function deleteBookFunction() {
     populateStorage();
 }
 
-
 function shiftId() {
     const bookCardLeft = document.querySelectorAll('.bookCard')
-    for ( let j = 0; j < bookCardLeft.length; j++) {
+    for (let j = 0; j < bookCardLeft.length; j++) {
         bookCardLeft[j].id = `${j}`;
     }
     const deleteBookLeft = document.querySelectorAll('.deleteBook');
-    for ( let j = 0; j < deleteBookLeft.length; j++) {
+    for (let j = 0; j < deleteBookLeft.length; j++) {
         deleteBookLeft[j].id = `${j}`;
     }
     const checkBoxLeft = document.querySelectorAll('input[name="bookReadStatus"]');
-    for ( let j = 0; j < checkBoxLeft.length; j++) {
+    for (let j = 0; j < checkBoxLeft.length; j++) {
         checkBoxLeft[j].id = `${j}`;
     }
 }
@@ -157,12 +144,6 @@ Book.prototype.changeReadStatus = function() {
    populateStorage();
 }
 
-
-// L O C A L    S T O R A G E   
-
-
-//localStorage.clear();
-
 function populateStorage() {
     localStorage.clear();
     for (let i = 0; i < myLibrary.length; i++) {
@@ -174,7 +155,7 @@ function populateStorage() {
 }
 
 function retrieveStorage() {
-    if (localStorage.length ===0) return
+    if (localStorage.length === 0) return
     myLibraryLength = localStorage.length / 4;
     for (let i = 0; i<myLibraryLength;i++) {
         let book = {
@@ -185,10 +166,15 @@ function retrieveStorage() {
         }
         myLibrary.push(book);
     }
-
 }
 
-for (let i =0 ; i < myLibrary.length; i++) {
+form.addEventListener('submit', clickHandler);
+form.addEventListener("submit", submitForm)
+span.addEventListener('click', closeForm);
+newBook.addEventListener('click', openForm);
+window.addEventListener('click', shiftId);
+
+for (let i = 0; i < myLibrary.length; i++) {
     displayBook();
 }
 
