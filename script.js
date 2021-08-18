@@ -15,7 +15,10 @@ const bookDiv = document.querySelector('.bookDiv');
 const formDiv = document.querySelector('.form');
 
 const newBook = document.querySelector('.newBook');
-newBook.addEventListener('click', accessForm);
+newBook.addEventListener('click', openForm);
+
+const span = document.querySelector('span');
+span.addEventListener('click', closeForm);
 
 const form = document.querySelector('form');
 form.addEventListener('submit', clickHandler);
@@ -31,8 +34,12 @@ function Book() {
     this.read = document.querySelector('input[name="bookRead"]:checked').value;
 }
 
-function accessForm() {
-    formDiv.toggleAttribute('hidden'); 
+function openForm() {
+    formDiv.style.display = "flex";
+}
+
+function closeForm() {
+    formDiv.style.display = "none";
 }
 
 function addBookToLibrary() {
@@ -43,7 +50,7 @@ function addBookToLibrary() {
 
 function clickHandler() {
     addBookToLibrary();
-    accessForm();
+    closeForm();
 }
 
 function submitForm(e){

@@ -5,12 +5,15 @@
     <title>Library</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tenali+Ramakrishna&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     </head>
 
     <body>
         <div class="top">
             <img src="https://freesvg.org/img/mono-ktimemon.png">
-            <h1>Library</h1>
+            <h1>L I B R A R Y</h1>
             <div class="newBookDiv">
                 <button class="newBook">+</button>
             </div>
@@ -18,33 +21,37 @@
         </div>
 
         <div class="bookDiv"></div>
-        <div class="form" hidden>
+        
+        <div class="form">
+            <div class="formContent">
+            <span class="closeForm">&times;</span>
             <form>
             <ul>
-                <li>
+                <li class="input1">
                     <label for="bookTitle">Book Title</label>
                     <input type="text" id="bookTitle" name="bookTitle" required>
                 </li>
-                <li>
+                <li class="input2">
                     <label for="bookAuthor">Book Author</label>
                     <input type="text" id="bookAuthor" name="bookAuthor" required>
                 </li>
-                <li>
+                <li class="input3">
                     <label for="bookPages">Pages</label>
                     <input type="number" id="bookPages" name="bookPages">
                 </li>
-                <li>
+                <li class="input4">
                 <label>Have you read the book?</label><br>
                     <input type="radio" id="readYes" name="bookRead" value="Yes" checked>
-                    <label for="readYes">Yes</label><br>
+                    <label for="readYes" id="readYesLabel">Yes</label><br>
                     <input type="radio" id="readNo" name="bookRead" value="No">
-                    <label for="readNo">No</label><br>
+                    <label for="readNo" id="readNoLabel">No</label><br>
                 </li>
-                <li>
-                    <button class="submit" type="submit" value="submit">submit</button>
+                <li class="formSubmit">
+                    <button class="submit" type="submit" value="submit">Submit</button>
                 </li>
             </ul>
         </form>
+        </div>
         </div>
     </body>
 </html>
