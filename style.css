@@ -44,30 +44,65 @@ h1 {
 }
 
 .bookDiv {
-    
     display: flex; 
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .bookCard {
-   color: white;
-   border: 5px solid rgba(52, 73, 94, 1);
-   margin: 2vw; 
+   border: 5px groove rgba(34, 49, 63, 1);
+   border-radius: 6%;
+   background-color: rgba(36, 37, 42, 1);
+   margin: 1vw; 
+   padding: 5px;
+   min-width: 15vw;
    display: flex;
    flex-direction: column;
    align-items: center;
-   width: 160px;
-   /**background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRQWBTCY5LzapIACcosZ2pBPGjDfH_7KEqkA&usqp=CAU);**/
+}
+
+.bookTitle {
+    font-size: 30px;
+    height: fit-content;
+    padding-top: 10px;
+    margin: 0px;
+    font-weight: bold;
+    color: 	rgb(245,255,250);
+    font-family: 'Acme', sans-serif;
+}
+
+.bookAuthor {
+    font-size: 25px;
+    margin: 0px;
+    padding: 5px;
+    font-family: "Tenali Ramakrishna", sans-serif;
+}
+
+.bookPages {
+    font-size: 20px;
+    font-family: "Acme", sans-serif;
+    background-color: rgba(34, 49, 63, 1);
+    width: 100%;
+    text-align: center;
+}
+
+.deleteBook {
+    margin: 10px;
+    border-radius: 10%;
+    border: 2px solid black;
+}
+
+.deleteBook:hover {
+    background-color: rgba(210, 77, 87, 0.8);
 }
 
 
 .bookCard.readYes {
-    box-shadow: 0 -10px 6px -1px green;
+    box-shadow: 0 -5px 2px -1px green;
 }
 
 .bookCard.readNo {
-    box-shadow: 0 -10px 6px -1px red;
+    box-shadow: 0 -5px 2px -1px red;
 }
 
 .form {

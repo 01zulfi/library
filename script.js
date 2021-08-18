@@ -76,10 +76,17 @@ function displayBook() {
     label.textContent = 'Read?';
     label.appendChild(checkBox);
 
+    bookTitle.classList.add("bookTitle")
+    bookAuthor.classList.add("bookAuthor")
+    bookPages.classList.add("bookPages")
+    label.classList.add("bookReadLabel")
+
+
+
     bookCard.id = `${count}`;
     bookCard.classList.add('bookCard');
     bookTitle.textContent = myLibrary[count].title;
-    bookAuthor.textContent = 'By ' + myLibrary[count].author;
+    bookAuthor.textContent = 'By: ' + myLibrary[count].author;
     bookPages.textContent = myLibrary[count].pages + ' pages';
     if (myLibrary[count].read === "Yes") {
         checkBox.checked = true;
@@ -95,10 +102,13 @@ function displayBook() {
     bookDiv.appendChild(bookCard);
     checkBox.addEventListener('change', Book.prototype.changeReadStatus)
     count++;
-
+ 
     deleteBookFunction();
+
+
 }
 
+window.addEventListener('click', shiftId);
 
 
 function deleteBookFunction() {
@@ -113,12 +123,16 @@ function deleteBookFunction() {
                 populateStorage();
             }
         }
-    
     }))
-    const bookCardLeft = document.querySelectorAll('.bookCard');
-        for ( let j = 0; j < bookCardLeft.length; j++) {
-            bookCardLeft[j].id = `${j}`;
-        }
+    populateStorage();
+}
+
+
+function shiftId() {
+    const bookCardLeft = document.querySelectorAll('.bookCard')
+    for ( let j = 0; j < bookCardLeft.length; j++) {
+        bookCardLeft[j].id = `${j}`;
+    }
     const deleteBookLeft = document.querySelectorAll('.deleteBook');
     for ( let j = 0; j < deleteBookLeft.length; j++) {
         deleteBookLeft[j].id = `${j}`;
@@ -127,9 +141,7 @@ function deleteBookFunction() {
     for ( let j = 0; j < checkBoxLeft.length; j++) {
         checkBoxLeft[j].id = `${j}`;
     }
-    populateStorage();
 }
-
 
 Book.prototype.changeReadStatus = function() {
     const bookCardNodeList = document.querySelectorAll('.bookCard');
@@ -142,7 +154,7 @@ Book.prototype.changeReadStatus = function() {
         bookCardNodeList[this.id].classList.remove('readYes');
         bookCardNodeList[this.id].classList.add('readNo');
     }
-    populateStorage();
+   populateStorage();
 }
 
 
