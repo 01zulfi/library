@@ -9,11 +9,13 @@ const newBook = document.querySelector('.newBook');
 const span = document.querySelector('span');
 const form = document.querySelector('form');
 
-function Book() {
-    this.title = document.getElementById('bookTitle').value;
-    this.author = document.getElementById('bookAuthor').value;
-    this.pages = document.getElementById('bookPages').value;
-    this.read = document.querySelector('input[name="bookRead"]:checked').value;
+class Book {
+    constructor() {
+        this.title = document.getElementById('bookTitle').value;
+        this.author = document.getElementById('bookAuthor').value;
+        this.pages = document.getElementById('bookPages').value;
+        this.read = document.querySelector('input[name="bookRead"]:checked').value;
+    }
 }
 
 function openForm() {
