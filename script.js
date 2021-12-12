@@ -1,3 +1,22 @@
+// Import the functions you need from the SDKs you need
+import {initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCPoUqUVaywVvXbONyeBDcWDrw-7wAEcKg",
+  authDomain: "library-db6c2.firebaseapp.com",
+  projectId: "library-db6c2",
+  storageBucket: "library-db6c2.appspot.com",
+  messagingSenderId: "688607074877",
+  appId: "1:688607074877:web:5541cc0fe566a2df89e854"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+console.log(app)
+
 let myLibrary = [];
 
 retrieveStorage();
@@ -156,7 +175,7 @@ function populateStorage() {
 
 function retrieveStorage() {
     if (localStorage.length === 0) return
-    myLibraryLength = localStorage.length / 4;
+    let myLibraryLength = localStorage.length / 4;
     for (let i = 0; i<myLibraryLength;i++) {
         let book = {
             title: localStorage.getItem(`bookTitle${i}`),

@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/xari4808/library/issues"
   },
-  "homepage": "https://github.com/xari4808/library#readme"
+  "homepage": "https://github.com/xari4808/library#readme",
+  "dependencies": {
+    "firebase": "^9.6.1"
+  }
 }
