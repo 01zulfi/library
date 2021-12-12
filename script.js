@@ -22,7 +22,73 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log(app);
+
+async function signIn() {
+  const provider = new GoogleAuthProvider();
+  await signInWithPopup(getAuth(), provider);
+}
+
+// Signs-out of Friendly Chat.
+function signOutUser() {
+  // TODO 2: Sign out of Firebase.
+  // Sign out of Firebase.
+  signOut(getAuth());
+}
+
+document.querySelector(".sign-in-button").addEventListener("click", signIn);
+document
+  .querySelector(".sign-out-button")
+  .addEventListener("click", signOutUser);
+
+function initFirebaseAuth() {
+  // TODO 3: Subscribe to the user's signed-in status
+  // Listen to auth state changes.
+  onAuthStateChanged(getAuth(), authStateObserver);
+}
+
+// Returns the signed-in user's profile Pic URL.
+function getProfilePicUrl() {
+  // TODO 4: Return the user's profile pic URL.
+  return getAuth().currentUser.photoURL || "/images/profile_placeholder.png";
+}
+
+// Returns the signed-in user's display name.
+function getUserName() {
+  // TODO 5: Return the user's display name.
+  return getAuth().currentUser.displayName;
+}
+
+function addSizeToGoogleProfilePic(url) {
+  if (url.indexOf("googleusercontent.com") !== -1 && url.indexOf("?") === -1) {
+    return url + "?sz=150";
+  }
+  return url;
+}
+
+// Triggers when the auth state change for instance when the user signs-in or signs-out.
+function authStateObserver(user) {
+  if (user) {
+    // User is signed in!
+    // Get the signed-in user's profile pic and name.
+    const profilePicUrl = getProfilePicUrl();
+    const userName = getUserName();
+
+    // Set the user's profile pic and name.
+    document.querySelector(".profile-picture").src =
+      addSizeToGoogleProfilePic(profilePicUrl);
+    document.querySelector(".profile-name").textContent = userName;
+    document.querySelector(".sign-in-button").classList.add("hidden");
+    document.querySelector(".sign-out-button").classList.remove("hidden");
+  } else {
+    // User is signed out!
+    // Hide user's profile and sign-out button.
+
+    document.querySelector(".profile-name").textContent = "";
+    document.querySelector(".profile-picture").src = "";
+    document.querySelector(".sign-in-button").classList.remove("hidden");
+    document.querySelector(".sign-out-button").classList.add("hidden");
+  }
+}
 
 let myLibrary = [];
 
@@ -207,3 +273,5 @@ window.addEventListener("click", shiftId);
 for (let i = 0; i < myLibrary.length; i++) {
   displayBook();
 }
+
+initFirebaseAuth();
